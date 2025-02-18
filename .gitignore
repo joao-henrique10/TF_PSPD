@@ -1,0 +1,25 @@
+# Ignorar o arquivo palavras.txt
+palavras.txt
+
+# Ignorar arquivos de compilação
+*.o
+*.out
+*.exe
+
+# Ignorar diretórios comuns de build
+/build/
+/bin/
+/obj/
+
+# Ignorar arquivos de log
+*.log
+
+# Ignorar arquivos temporários do sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar configurações do editor
+.vscode/
+.idea/
+*.swp
+*.swo
