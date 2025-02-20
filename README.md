@@ -31,7 +31,7 @@ time mpirun -np 4 ./contaPalavras
 
 ![imagem MPI/omp local](./assets/mpi_omp_local.png)
 
-&emsp;&emsp;Para averiguação do resultado do cógigo rodamos o seguinte comando abaixo estando na pasta [codigos](./codigos/), que nos mostra que os resultados foram os mesmos, porém com um tempo bem maior que usando **MPI/omp**.
+&emsp;&emsp;Para averiguação do resultado do código rodamos o seguinte comando abaixo estando na pasta [codigos](./codigos/), que nos mostra que os resultados foram os mesmos, porém com um tempo bem maior que usando **MPI/omp**.
 
 ```
 sort palavras.txt | uniq -c | sort -nr
