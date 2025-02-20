@@ -4,7 +4,7 @@
 #include <string.h>
 #include <omp.h>
 
-#define TOTAL_PALAVRAS 25000000
+#define TOTAL_PALAVRAS 250000000
 #define NUM_THREADS 4
 
 const char *palavras[] = {
