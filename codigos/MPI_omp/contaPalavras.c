@@ -7,6 +7,10 @@
 #define NUM_THREADS 4
 #define MAX_WORDS 21
 
+#ifndef PALAVRAS_PATH
+#define PALAVRAS_PATH "../palavras.txt"
+#endif
+
 const char *palavras[] = {
     "amor", "amizade", "casa", "felicidade", "natureza", "sol", "chuva",
     "flor", "montanha", "rio", "vida", "saude", "alegria", "esperanca",
@@ -23,10 +27,18 @@ int find_word_index(const char *word) {
 }
 
 int main(int argc, char *argv[]){
-    int rank, size;
+    int rank, size, proc_name_size;
     MPI_Init(&argc, &argv);
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
+
+    if (rank == 0) {
+        printf("workers: %d\n", size);
+    }
+
+    char hostname[MPI_MAX_PROCESSOR_NAME];
+    MPI_Get_processor_name(hostname, &proc_name_size);
+    printf("rank %d on host %s\n", rank, hostname);
     
     /* Determina o comprimento máximo entre as palavras (igual ao usado na criação) */
     int max_len = 0;
@@ -38,9 +50,10 @@ int main(int argc, char *argv[]){
     int record_length = max_len + 1; // palavra preenchida + '\n'
     
     MPI_File mpi_file;
-    if (MPI_File_open(MPI_COMM_WORLD, "../palavras.txt", MPI_MODE_RDONLY, MPI_INFO_NULL, &mpi_file) != MPI_SUCCESS) {
+    int error_code;
+    if ((error_code = MPI_File_open(MPI_COMM_WORLD, PALAVRAS_PATH, MPI_MODE_RDONLY, MPI_INFO_NULL, &mpi_file)) != MPI_SUCCESS) {
         if (rank == 0)
-            fprintf(stderr, "Erro ao abrir o arquivo.\n");
+            fprintf(stderr, "Erro ao abrir o arquivo (erro %d).\n", error_code);
         MPI_Abort(MPI_COMM_WORLD, 1);
     }
     
