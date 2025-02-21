@@ -4,6 +4,7 @@
 |Matrícula | Aluno |
 | -- | -- |
 | 190084600  |  Arthur José Nascimento de Lima |
+| 202023681  |  Gabriel da Silva Rosa |
 | 200019015  |  Guilherme Puida Moreira |
 | 200067923  |  João Henrique Marques Calzavara |
 | 200062379  |  Marcos Vinícius de Deus |
