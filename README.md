@@ -39,3 +39,15 @@ sort palavras.txt | uniq -c | sort -nr
 ```
 
 ![imagem comando sort](./assets/comando_sort.png)
+
+## Código C sem paralelização nem distribuição
+
+&emsp;&emsp;Para fins de comparação, criamos também um código **C** [contaSemParalel.c](./codigos/semParalelizacao/contaSemParalel.c) que faz a contagem de palavras de forma sequencial, que após ser executados os comandos abaixo, gerou o tempo da imagem abaixo, mostrando ser menos eficaz.
+
+```
+gcc -o contaSemParalel contaSemParalel.c 
+./contaSemParalel
+```
+
+![imagem sem paralelização](./assets/semParalelizacao.png)
+
