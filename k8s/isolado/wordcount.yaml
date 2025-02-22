@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordcount-simples-service
+spec:
+  selector:
+    app: wordcount-simples
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordcount-simples-deployment
+spec:
+  replicas: 6
+  selector:
+    matchLabels:
+      app: wordcount-simples
+  template:
+    metadata:
+      labels:
+        app: wordcount-simples
+    spec:
+      containers:
+        - name: wordcount-simples
+          image: puida/go-wordcount:latest
+          ports:
+            - containerPort: 8080

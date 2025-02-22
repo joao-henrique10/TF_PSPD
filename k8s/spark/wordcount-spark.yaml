@@ -1,0 +1,34 @@
+apiVersion: sparkoperator.k8s.io/v1beta2
+kind: SparkApplication
+metadata:
+  name: wordcount-spark
+spec:
+  type: Java
+  mode: cluster
+  image: spark:3.5.3
+  imagePullPolicy: IfNotPresent
+  mainClass: org.apache.spark.examples.JavaWordCount
+  mainApplicationFile: local:///opt/spark/examples/jars/spark-examples.jar
+  arguments:
+    - /data/palavras.txt
+  sparkVersion: 3.5.3
+  driver:
+    labels:
+      version: 3.5.3
+    cores: 1
+    serviceAccount: spark-operator-spark
+    volumeMounts:
+      - name: mpi-data
+        mountPath: /data
+  executor:
+    labels:
+      version: 3.5.3
+    instances: 6
+    volumeMounts:
+      - name: mpi-data
+        mountPath: /data
+  volumes:
+    - name: mpi-data
+      hostPath:
+        path: /mnt/mpi-data
+        type: Directory
